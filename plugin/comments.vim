@@ -144,7 +144,7 @@ function! CommentLine()
   elseif file_name =~ '\.vim$' || file_name =~ '\.vimrc$'
 	 execute ":silent! normal ^i\"\<ESC>\<down>^"
   " for .sql files use --
-  elseif file_name =~ '\.sql$'
+  elseif file_name =~ '\.sql$' || file_name =~ '\.lua$'
     execute ":silent! normal ^i--\<ESC>\<down>^"
   " for .ksh or .sh or .csh or .pl or .pm files use #
   elseif file_name =~ '\.[kc]\?sh$' || file_name =~ '\.pl$' || file_name =~ '\.pm$'
@@ -185,7 +185,7 @@ function! UnCommentLine()
   elseif file_name =~ '\.vim$' || file_name =~ '\.vimrc$'
     execute ":silent! normal :nohlsearch\<CR>:s/\\\"//\<CR>:nohlsearch\<CR>"
   " for .sql files use --
-  elseif file_name =~ '\.sql$'
+  elseif file_name =~ '\.sql$' || file_name =~ '\.lua$'
     execute ":silent! normal :nohlsearch\<CR>:s/\\-\\-//\<CR>:nohlsearch\<CR>"
   " for .ksh or .sh or .csh or .pl or .pm files use #
   elseif file_name =~ '\.[kc]\?sh$' || file_name =~ '\.pl$' || file_name =~ '\.pm$'
@@ -254,7 +254,7 @@ function! RangeCommentLine()
   elseif file_name =~ '\.vim$' || file_name =~ '\.vimrc$'
     execute ":silent! normal :s/\\S/\\\"\\0/\<CR>:nohlsearch<CR>"
   " for .sql files use --
-  elseif file_name =~ '\.sql$'
+  elseif file_name =~ '\.sql$' || file_name =~ '\.lua$'
     execute ":silent! normal :s/\\S/\\-\\-\\0/\<CR>:nohlsearch<CR>"
   " for .ksh or .sh or .csh or .pl or .pm files use #
   elseif file_name =~ '\.[kc]\?sh$' || file_name =~ '\.pl$' || file_name =~ '\.pm$'
@@ -291,7 +291,7 @@ function! RangeUnCommentLine()
   elseif file_name =~ '\.vim$' || file_name =~ '\.vimrc$'
     execute ":silent! normal :s/\\\"//\<CR>:nohlsearch\<CR>"
   " for .sql files use -- 
-  elseif file_name =~ '\.sql$'
+  elseif file_name =~ '\.sql$' || file_name =~ '\.lua$'
     execute ":silent! normal :s/\\-\\-//\<CR>:nohlsearch\<CR>"
   " for .ml .mli
   elseif file_name =~ '\.ml$' || file_name =~ '\.mli$'
