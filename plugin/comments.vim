@@ -163,6 +163,10 @@ function! CommentLine()
     execute ":silent! normal ^gI-- \<ESC>\<down>^"
   elseif file_name =~ '\.py$'
     execute ":silent! normal ^i# \<ESC>\<down>^"
+  elseif &filetype == 'ansible'
+    let g:ansible_keep_same_indent_level=1
+    execute ":silent! normal ^i# \<ESC>\<down>^"
+    let g:ansible_keep_same_indent_level=0
   " for all other files use # 
   else
     execute ":silent! normal ^i#\<ESC>\<down>^"
@@ -208,6 +212,10 @@ function! UnCommentLine()
   " for VHDL and Haskell files use --
   elseif file_name =~ '\.vhd$' || file_name =~ '\.vhdl$' || file_name =~ '\.hs$'
     execute ":silent! normal :nohlsearch\<CR>:s/-- //\<CR>:nohlsearch\<CR>"
+  elseif &filetype == 'ansible'
+    let g:ansible_keep_same_indent_level=1
+    execute ":silent! normal :nohlsearch\<CR>:s/\\# //\<CR>:nohlsearch\<CR>"
+    let g:ansible_keep_same_indent_level=0
   " for all other files use # 
   elseif file_name =~ '\.py$'
     execute ":silent! normal :nohlsearch\<CR>:s/\\# //\<CR>:nohlsearch\<CR>"
@@ -277,6 +285,10 @@ function! RangeCommentLine()
     execute ":silent! normal ^gI-- \<ESC>\<down>^"
   elseif file_name =~ '\.py$'
     execute ":silent! normal :s/\\S/\\# \\0/\<CR>:nohlsearch<CR>"
+  elseif &filetype == 'ansible'
+    let g:ansible_keep_same_indent_level=1
+    execute ":silent! normal :s/\\S/\\# \\0/\<CR>:nohlsearch<CR>"
+    let g:ansible_keep_same_indent_level=0
   " for all other files use #  
   else
     execute ":silent! normal :s/\\S/\\#\\0/\<CR>:nohlsearch<CR>"
@@ -324,6 +336,10 @@ function! RangeUnCommentLine()
   elseif file_name =~ '\.py$'
     execute ":silent! normal :s/\\# //\<CR>:nohlsearch\<CR>"
   " for all other files use # 
+  elseif &filetype == 'ansible'
+    let g:ansible_keep_same_indent_level=1
+    execute ":silent! normal :s/\\# //\<CR>:nohlsearch\<CR>"
+    let g:ansible_keep_same_indent_level=0
   else
     execute ":silent! normal :s/\\#//\<CR>:nohlsearch\<CR>"
   endif
