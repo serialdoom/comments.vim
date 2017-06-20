@@ -124,6 +124,8 @@ function! CommentLine()
     elseif stridx(getline("."), "\/\*") == -1 && stridx(getline("."), "\*\/") == -1
       execute ":silent! normal ^i/*\<ESC>$a*/\<ESC>==\<down>^"
     endif
+  elseif file_name =~ '\.erb'
+      execute ":silent! normal ^i\<%# \<ESC>A %>\<ESC>\<CR>"
   "for .ml or .mli files use (* *)
   elseif file_name =~ '\.ml$' || file_name =~ '\.mli$'
     if stridx(getline("."), "\(\*") == -1 && stridx(getline("."), "\*)") == -1
@@ -181,6 +183,9 @@ function! UnCommentLine()
   if file_name =~ '\.cpp$' || file_name =~ '\.hpp$' || file_name =~ '\.java$' || file_name =~ '\.php[2345]\?$' || file_name =~ '\.C$' || file_name =~ '\.asm$' || file_name =~ '\.dsl$' || file_name =~ '.groovy$'
     execute ":silent! normal :nohlsearch\<CR>:s/\\/\\///\<CR>:nohlsearch\<CR>=="
   " for .ml or .mli
+  elseif file_name =~ '\.erb'
+      execute ":silent! normal :nohlsearch\<CR>:s/<%# //\<CR>:nohlsearch\<CR>"
+      execute ":silent! normal :nohlsearch\<CR>:s/ %>//\<CR>:nohlsearch\<CR>"
   elseif file_name =~ '\.ml$' || file_name =~ '\.mli$'
     execute ":silent! normal :nohlsearch\<CR>:s/(\\*//\<CR>:nohlsearch\<CR>"
 	execute ":silent! normal :nohlsearch\<CR>:s/\\*)//\<CR>:nohlsearch\<CR>=="
